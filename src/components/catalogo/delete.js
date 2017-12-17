@@ -21,10 +21,11 @@ class DeleteCatalogo extends Component {
       }
 
     handleSubmit() {
+        this.close()
         let promise = this.resource.delete(this.props.catalogo.id);
         promise.then((response) => {
             console.log(response.data)
-            this.close()
+            this.props.handleRemoved(this.props.catalogo.id)
         }, (error) => {
             console.log(error)
         })

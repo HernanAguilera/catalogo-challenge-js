@@ -21,13 +21,14 @@ class CreateItem extends Component {
       }
 
     handleSubmit() {
+        this.close()
         let promise = this.resource.post({
             descripcion: this.descripcion.value,
             area: this.props.area
         });
         promise.then((response) => {
             console.log(response.data)
-            this.close()
+            this.props.handleStored(response.data)
         }, (error) => {
             console.log(error)
         })

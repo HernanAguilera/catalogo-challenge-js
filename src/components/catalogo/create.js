@@ -21,10 +21,11 @@ class CreateCatalogo extends Component {
       }
 
     handleSubmit() {
+        this.close()
         let promise = this.resource.post({descripcion: this.descripcion.value});
         promise.then((response) => {
             console.log(response.data)
-            this.close()
+            this.props.handleStored(response.data)
         }, (error) => {
             console.log(error)
         })

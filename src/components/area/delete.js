@@ -21,10 +21,11 @@ class DeleteArea extends Component {
       }
 
     handleSubmit() {
+        this.close()
         let promise = this.resource.delete(this.props.area.id);
         promise.then((response) => {
             console.log(response.data)
-            this.close()
+            this.props.handleRemoved(this.props.area.id)
         }, (error) => {
             console.log(error)
         })

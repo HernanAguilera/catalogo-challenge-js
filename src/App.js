@@ -8,15 +8,33 @@ import CreateCatalogo from './components/catalogo/create'
 
 import './App.css';
 
-const Home = () => (
-  <div className="container">
-    <h1>
-      Catalogos
-      &nbsp;<CreateCatalogo />
-    </h1>
-    <ListCatalogo />
-  </div>
-)
+class Home extends Component {
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      newCategoria: null
+    }
+  }
+
+  handleStored (newCategoria) {
+    this.setState({
+      newCategoria: newCategoria
+    })
+  }
+
+  render () {
+    return (
+      <div className="container">
+        <h1>
+          Catalogos
+          &nbsp;<CreateCatalogo handleStored={this.handleStored.bind(this)} />
+        </h1>
+        <ListCatalogo newCategoria={this.state.newCategoria} />
+      </div>
+    )
+  }
+}
 
 class App extends Component {
   render() {

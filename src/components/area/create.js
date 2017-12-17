@@ -21,13 +21,14 @@ class CreateArea extends Component {
       }
 
     handleSubmit() {
+        this.close()
         let promise = this.resource.post({
             descripcion: this.descripcion.value,
             catalogo: this.props.catalogo
         });
         promise.then((response) => {
             console.log(response.data)
-            this.close()
+            this.props.handleStored(response.data)
         }, (error) => {
             console.log(error)
         })

@@ -9,17 +9,20 @@ class ElementCatalogo extends Component {
     constructor (props) {
         super(props);
         this.state = {
-          showChildren: props.showChildren
+          showChildren: props.showChildren,
+          newArea: null
         }
     }
-
-    // componentWillMount () {
-    //     console.log(this.props)
-    // }
 
     toggle (e) {
         e.preventDefault();
         this.setState({showChildren: !this.state.showChildren})
+    }
+
+    handleStored (newArea) {
+        this.setState({
+            newArea:newArea
+        })
     }
 
     render () {
@@ -29,10 +32,14 @@ class ElementCatalogo extends Component {
                 <li>
                     <a href="#" onClick={toggle}>(-)</a>
                     {this.props.catalogo.descripcion}
-                    &nbsp;<EditCatalogo catalogo={this.props.catalogo} />
-                    &nbsp;<DeleteCatalogo catalogo={this.props.catalogo} />
-                    &nbsp;<CreateArea catalogo={this.props.catalogo.id} />
-                    <ListArea catalogo={this.props.catalogo.id} />
+                    &nbsp;<EditCatalogo catalogo={this.props.catalogo} handleUpdated={this.props.handleUpdated} />
+                    &nbsp;<DeleteCatalogo catalogo={this.props.catalogo} handleRemoved={this.props.handleRemoved} />
+                    <ul>
+                        <li>
+                            <CreateArea catalogo={this.props.catalogo.id} handleStored={this.handleStored.bind(this)} />
+                        </li>
+                    </ul>
+                    <ListArea catalogo={this.props.catalogo.id} newArea={this.state.newArea} />
                 </li>
             );
         }
@@ -41,9 +48,8 @@ class ElementCatalogo extends Component {
             <li>
                 <a href="#" onClick={toggle}>(+)</a>
                 {this.props.catalogo.descripcion}
-                &nbsp;<EditCatalogo catalogo={this.props.catalogo} />
-                &nbsp;<DeleteCatalogo catalogo={this.props.catalogo} />
-                &nbsp;<CreateArea catalogo={this.props.catalogo.id} />
+                &nbsp;<EditCatalogo catalogo={this.props.catalogo} handleUpdated={this.props.handleUpdated} />
+                &nbsp;<DeleteCatalogo catalogo={this.props.catalogo} handleRemoved={this.props.handleRemoved} />
             </li>
         );
     }

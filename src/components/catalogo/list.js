@@ -27,23 +27,57 @@ class ListCatalogo extends Component {
     this.loadData();
   }
 
-    render() {
-        return (
-            <div className="ListCatalogo">
-              <ul>
-                  {
-                    this.state.elements.map(function(ele){
-                      return (
-                          <span  key={ele.id}>
-                            <ElementCatalogo catalogo={ele} showChildren={false} />
-                          </span>
-                      );
-                    })
-                  }
-              </ul>
-            </div>
-        );
+  componentWillReceiveProps(nextProps) {
+    this.loadData();
+  }
+
+  handleUpdated (data) {
+    let index = this.getIndex(data.id);
+    let elements = this.state.elements;
+    elements[index].descripcion = data.descripcion
+    this.setState({
+      elements:elements
+    })
+  }
+
+  handleRemoved (id) {
+    let index = this.getIndex(id);
+    let elements = this.state.elements;
+    elements.splice(index,1);
+    this.setState({
+      elements:elements
+    })
+  }
+
+  getIndex (id) {
+    for (let i = 0; i<this.state.elements.length;i++){
+      if (this.state.elements[i].id === id)
+        return i;
     }
+    return -1;
+  }
+
+  render() {
+      return (
+          <div className="ListCatalogo">
+            <ul>
+                {
+                  this.state.elements.map((ele) => {
+                    return (
+                        <span  key={ele.id}>
+                          <ElementCatalogo catalogo={ele} 
+                                           showChildren={false} 
+                                           handleUpdated={this.handleUpdated.bind(this)}
+                                           handleRemoved={this.handleRemoved.bind(this)}
+                                           />
+                        </span>
+                    );
+                  })
+                }
+            </ul>
+          </div>
+      );
+  }
 }
 
 export default ListCatalogo;

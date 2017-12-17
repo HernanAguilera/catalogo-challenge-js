@@ -27,17 +27,47 @@ class ListItem extends Component {
     this.loadData();
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.loadData();
+  }
+
+  handleUpdated (data) {
+    let index = this.getIndex(data.id);
+    let elements = this.state.elements;
+    elements[index].descripcion = data.descripcion
+    this.setState({
+      elements:elements
+    })
+  }
+
+  handleRemoved (id) {
+    let index = this.getIndex(id);
+    let elements = this.state.elements;
+    elements.splice(index,1);
+    this.setState({
+      elements:elements
+    })
+  }
+
+  getIndex (id) {
+    for (let i = 0; i<this.state.elements.length;i++){
+      if (this.state.elements[i].id === id)
+        return i;
+    }
+    return -1;
+  }
+
   render() {
     return (
       <div className="ListItem">
         <ul>
             {
-            this.state.elements.map(function(ele){
+            this.state.elements.map((ele) => {
                 return (
                     <li key={ele.id}>
                         {ele.descripcion}
-                        &nbsp;<EditItem item={ele} />
-                        &nbsp;<DeleteItem item={ele} />
+                        &nbsp;<EditItem item={ele} handleUpdated={this.handleUpdated.bind(this)} />
+                        &nbsp;<DeleteItem item={ele} handleRemoved={this.handleRemoved.bind(this)} />
                     </li>
                 );
             })

@@ -22,10 +22,11 @@ class EditCatalogo extends Component {
     }
 
     handleSubmit() {
+        this.close()
         let promise = this.resource.patch(this.props.catalogo.id ,{descripcion: this.descripcion.value});
         promise.then((response) => {
             console.log(response.data)
-            this.close()
+            this.props.handleUpdated(response.data)
         }, (error) => {
             console.log(error)
         })

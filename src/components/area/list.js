@@ -26,14 +26,48 @@ class ListArea extends Component {
     this.loadData();
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.loadData();
+  }
+
+  handleUpdated (data) {
+    let index = this.getIndex(data.id);
+    let elements = this.state.elements;
+    elements[index].descripcion = data.descripcion
+    this.setState({
+      elements:elements
+    })
+  }
+
+  handleRemoved (id) {
+    let index = this.getIndex(id);
+    let elements = this.state.elements;
+    elements.splice(index,1);
+    this.setState({
+      elements:elements
+    })
+  }
+
+  getIndex (id) {
+    for (let i = 0; i<this.state.elements.length;i++){
+      if (this.state.elements[i].id === id)
+        return i;
+    }
+    return -1;
+  }
+
   render() {
     return (
       <div className="ListArea">
         <ul>
             {
-              this.state.elements.map(function(ele){
+              this.state.elements.map((ele) => {
                 return (
-                    <ElementoArea area={ele} showChildren={false} key={ele.id} />
+                    <ElementoArea area={ele} 
+                                  showChildren={false} 
+                                  handleUpdated={this.handleUpdated.bind(this)}
+                                  handleRemoved={this.handleRemoved.bind(this)}
+                                  key={ele.id} />
                 );
               })
             }
