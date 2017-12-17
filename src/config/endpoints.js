@@ -1,5 +1,5 @@
 const endpoints = {
-    catagalogos: '/catalogos/',
+    catalogos: '/catalogos/',
     areas: '/areas/',
     items: '/items/'
 }

@@ -29,7 +29,7 @@ class HttpClient {
   }
 
   setToken (token) {
-    this.client.defaults.headers.common['Authorization'] = token
+    this.client.defaults.headers.common['Authorization'] = `token ${token}`
   }
 }
 
