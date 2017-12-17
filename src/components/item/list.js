@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Item from '../../utils/resources/Item'
+import EditItem from './edit'
 import DeleteItem from './delete'
 
 class ListItem extends Component {
@@ -35,6 +36,7 @@ class ListItem extends Component {
                 return (
                     <li key={ele.id}>
                         {ele.descripcion}
+                        &nbsp;<EditItem item={ele} />
                         &nbsp;<DeleteItem item={ele} />
                     </li>
                 );

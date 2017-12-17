@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ListArea from '../area/list'
 import CreateArea from '../area/create'
+import EditCatalogo from './edit'
 import DeleteCatalogo from './delete'
 
 class ElementCatalogo extends Component {
@@ -28,6 +29,7 @@ class ElementCatalogo extends Component {
                 <li>
                     <a href="#" onClick={toggle}>(-)</a>
                     {this.props.catalogo.descripcion}
+                    &nbsp;<EditCatalogo catalogo={this.props.catalogo} />
                     &nbsp;<DeleteCatalogo catalogo={this.props.catalogo} />
                     &nbsp;<CreateArea catalogo={this.props.catalogo.id} />
                     <ListArea catalogo={this.props.catalogo.id} />
@@ -39,6 +41,7 @@ class ElementCatalogo extends Component {
             <li>
                 <a href="#" onClick={toggle}>(+)</a>
                 {this.props.catalogo.descripcion}
+                &nbsp;<EditCatalogo catalogo={this.props.catalogo} />
                 &nbsp;<DeleteCatalogo catalogo={this.props.catalogo} />
                 &nbsp;<CreateArea catalogo={this.props.catalogo.id} />
             </li>

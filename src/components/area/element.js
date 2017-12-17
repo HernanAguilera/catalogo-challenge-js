@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ListItem from '../item/list'
 import CreateItem from '../item/create'
+import EditArea from './edit'
 import DeleteArea from './delete'
 
 class ElementArea extends Component {
@@ -28,6 +29,7 @@ class ElementArea extends Component {
                 <li>
                     <a href="#" onClick={toggle}>(-)</a>
                     {this.props.area.descripcion}
+                    &nbsp;<EditArea area={this.props.area} />
                     &nbsp;<DeleteArea area={this.props.area} />
                     &nbsp;<CreateItem area={this.props.area.id} />
                     <ListItem area={this.props.area.id} />
@@ -39,6 +41,7 @@ class ElementArea extends Component {
             <li>
                 <a href="#" onClick={toggle}>(+)</a>
                 {this.props.area.descripcion}
+                &nbsp;<EditArea area={this.props.area} />
                 &nbsp;<DeleteArea area={this.props.area} />
                 &nbsp;<CreateItem area={this.props.area.id} />
             </li>
