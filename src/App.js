@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import Login from './components/login'
+import ListCatalogo from './components/catalogo/list'
+import CreateCatalogo from './components/catalogo/create'
+
 import './App.css';
 
 const Home = () => (
   <div className="container">
-    <h1>Catalogos</h1>
+    <h1>
+      Catalogos
+      &nbsp;<CreateCatalogo />
+    </h1>
+    <ListCatalogo />
   </div>
 )
 
@@ -24,12 +31,12 @@ class App extends Component {
             </Navbar.Header>
             <Nav>
               <LinkContainer exact to="/">
-                <NavItem eventKey={1}>Home</NavItem>
+                <NavItem>Home</NavItem>
               </LinkContainer>
             </Nav>
             <Nav pullRight>
             <LinkContainer to="/login">
-              <NavItem eventKey={2}>Login</NavItem>
+              <NavItem>Login</NavItem>
             </LinkContainer>
             </Nav>
           </Navbar>
