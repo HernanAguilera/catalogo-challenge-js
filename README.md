@@ -1,6 +1,6 @@
 ## Catalogo-challenge-js
 
-Cliente creado con react 16, Axios y bootstrapt
+Cliente creado con react 16, Axios y bootstrap
 
 ### Instalación
 
