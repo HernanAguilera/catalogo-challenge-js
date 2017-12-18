@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, ControlLabel, FormControl } from 'react-bootst
 import { Redirect } from 'react-router-dom';
 import HttpClient from '../utils/http';
 import StorageManager from '../utils/storage';
+import Notifications from '../utils/notifications'
 import './login.css';
 
 class Login extends Component {
@@ -10,14 +11,12 @@ class Login extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            authenticated: false
+            authenticated: StorageManager.get('token') ? true : false
         };
     }
 
     handleSubmit (e) {
         e.preventDefault();
-        console.log('email', this.email.value)
-        console.log('password', this.password.value)
         let data = {
             email: this.email.value,
             password: this.password.value
@@ -27,11 +26,10 @@ class Login extends Component {
             .then((response) => {
                     StorageManager.set('token', response.data.key);
                     this.setState({ authenticated: true });
-                    console.log('this',this);
-                    console.log('to bien!');
+                    Notifications.success('Iniciando sesión');
                 }, (error) => {
-                        alert('Login invalido');
-                        console.log(error)
+                        Notifications.error('Credenciales invalidas');
+                        console.log(error);
                     })
     }
 

@@ -31,6 +31,10 @@ class HttpClient {
   setToken (token) {
     this.client.defaults.headers.common['Authorization'] = `token ${token}`
   }
+
+  unsetToken () {
+    delete this.client.defaults.headers.common['Authorization']
+  }
 }
 
 export default new HttpClient();
